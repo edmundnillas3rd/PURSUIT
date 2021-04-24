@@ -14,6 +14,7 @@ public class SQLDatabase {
     static private Connection c;
     static private Statement stmt;
     
+    private static String tblPlanName;
     private final static String columnWorkout = "workout_name";
     private final static String columnWorkoutDuration = "workout_duration";
     private final static String columnDiet = "diet";
@@ -42,7 +43,7 @@ public class SQLDatabase {
                     +   columnWorkout + " VARCHAR(100), "
                     +   columnWorkoutDuration + " VARCHAR(100), "
                     +   columnDiet + " VARCHAR(100));";
-            stmt = c.createStatement();
+            stmt = SQLDatabase.getCon().createStatement();
             stmt.execute(q);
             System.out.println("Table Successfully Created!");
             stmt.close();
@@ -56,18 +57,21 @@ public class SQLDatabase {
             String q = "DROP TABLE IF EXISTS " + tblName;
             stmt = c.createStatement();
             stmt.execute(q);
-            stmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
     
-    public static void queryTable(String tblName) {
-        try {
-            stmt = c.createStatement();
-        } catch (SQLException ex) {
-            
-        }
+    public static ResultSet queryTable(String tblName) throws Exception {
+        return SQLDatabase.getCon().createStatement().executeQuery("SELECT * FROM " + tblName + ";");
+    }
+    
+    public static ResultSet queryTable(String tblName, String column1) throws Exception {
+        return SQLDatabase.getCon().createStatement().executeQuery("SELECT " + column1 + " FROM " + tblName + ";");
+    }
+    
+    public static ResultSet queryTable(String tblName, String column1, String column2) throws Exception {
+        return SQLDatabase.getCon().createStatement().executeQuery("SELECT " + column1 + ", " + column2 + " FROM " + tblName);
     }
     
     public static void insertData(String tblName, String data) {
@@ -106,7 +110,39 @@ public class SQLDatabase {
         }
     }
     
+    public static void updateData(String tblName, String column, String value) {
+        try {
+            Connection con = SQLDatabase.getCon();
+            PreparedStatement stmt = con.prepareStatement("UPDATE " + tblName + " SET " + column + "=?;");
+            stmt.setString(1, value);
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (Exception ex) {
+            Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public static ResultSet getData(String query) throws Exception {
         return SQLDatabase.getCon().createStatement().executeQuery(query);
+    }
+    
+    public static void setTblName(String tblName) {
+        tblPlanName = tblName;
+    }
+    
+    public static String getTblName() {
+        return tblPlanName;
+    }
+    
+    public static String getWorkoutColumn() {
+        return columnWorkout;
+    }
+    
+    public static String getWorkoutDurationColumn() {
+        return columnWorkoutDuration;
+    }
+    
+    public static String getDietColumn() {
+        return columnDiet;
     }
 }

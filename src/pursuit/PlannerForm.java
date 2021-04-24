@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -13,7 +14,7 @@ import pursuit.DataHandler.SQLDatabase;
 import pursuit.DataHandler.TextFormat;
 
 import pursuit.PlannerHandler.AddWorkoutForm;
-import pursuit.PlannerHandler.EditWorkoutForm;
+import pursuit.PlannerHandler.ViewWorkoutForm;
 
 public class PlannerForm extends javax.swing.JFrame {
     private Connection con;
@@ -186,12 +187,13 @@ public class PlannerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        this.dispose();
         DefaultTableModel tblModQueryPlans = (DefaultTableModel)tblPlans.getModel();
         int selectedRowIndex = tblPlans.getSelectedRow();
         Object value = tblModQueryPlans.getValueAt(selectedRowIndex, 0);
         String formattedTableName = TextFormat.formatRetrievedTableName(value.toString());
-        new EditWorkoutForm(formattedTableName);
+        this.dispose();
+        SQLDatabase.setTblName(formattedTableName);
+        new ViewWorkoutForm();
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed

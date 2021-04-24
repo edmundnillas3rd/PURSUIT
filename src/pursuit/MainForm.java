@@ -67,8 +67,8 @@ public class MainForm extends javax.swing.JFrame {
     
     
     private void btnOpenPlannerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenPlannerActionPerformed
-        new PlannerForm();
         this.dispose();
+        new PlannerForm();
     }//GEN-LAST:event_btnOpenPlannerActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
