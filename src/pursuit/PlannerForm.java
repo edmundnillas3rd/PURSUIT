@@ -168,7 +168,7 @@ public class PlannerForm extends javax.swing.JFrame {
         try {
             DefaultTableModel tblModPlans = (DefaultTableModel)tblPlans.getModel();
             DatabaseMetaData md = SQLDatabase.getCon().getMetaData();
-            String dbName = "plandba";
+            String dbName = "temp";
             ResultSet rs = md.getTables(dbName, null, "%", null);
             while(rs.next()) {
                 String planName = rs.getString(3);
@@ -182,8 +182,9 @@ public class PlannerForm extends javax.swing.JFrame {
     }
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        this.dispose();
         new AddWorkoutForm();
+        this.dispose();
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
@@ -191,9 +192,9 @@ public class PlannerForm extends javax.swing.JFrame {
         int selectedRowIndex = tblPlans.getSelectedRow();
         Object value = tblModQueryPlans.getValueAt(selectedRowIndex, 0);
         String formattedTableName = TextFormat.formatRetrievedTableName(value.toString());
-        this.dispose();
         SQLDatabase.setTblName(formattedTableName);
         new ViewWorkoutForm();
+        this.dispose();
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -212,8 +213,8 @@ public class PlannerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        this.dispose();
         new MainForm();
+        this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
     
     public static void main(String args[]) {

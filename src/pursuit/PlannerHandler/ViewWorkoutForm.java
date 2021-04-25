@@ -1,11 +1,11 @@
 package pursuit.PlannerHandler;
 
-import com.mysql.cj.util.StringUtils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.lang3.StringUtils;
 
 import pursuit.*;
 import pursuit.DataHandler.JTextFieldLimiter;
@@ -185,8 +185,8 @@ public class ViewWorkoutForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        this.dispose();
         new PlannerForm();
+        this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void createConnection() {
@@ -209,7 +209,7 @@ public class ViewWorkoutForm extends javax.swing.JFrame {
             while(rs.next()) {
                 String workout = rs.getString(colmnWorkout);
                 String duration = rs.getString(colmnDuration);
-                boolean checkString = StringUtils.isNullOrEmpty(workout) || StringUtils.isNullOrEmpty(duration);
+                boolean checkString = StringUtils.isAllBlank(workout) || StringUtils.isAllBlank(duration);
                 if (checkString)
                     continue;
                 tblModWorkout = (DefaultTableModel)tblWorkout.getModel();
@@ -224,7 +224,7 @@ public class ViewWorkoutForm extends javax.swing.JFrame {
             ResultSet rs = SQLDatabase.queryTable(tblPlanName, colmnDiet);
             while (rs.next()) {
                 String diet = rs.getString(colmnDiet);
-                boolean checkString = StringUtils.isNullOrEmpty(diet);
+                boolean checkString = StringUtils.isAllBlank(diet);
                 if (checkString)
                     continue;
                 tblModDiet = (DefaultTableModel)tblDiet.getModel();

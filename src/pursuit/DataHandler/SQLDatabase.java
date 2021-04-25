@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SQLDatabase {
-    static private Connection c;
+    static private Connection con;
     static private Statement stmt;
     
     private static String tblPlanName;
@@ -21,19 +21,16 @@ public class SQLDatabase {
     
     public static Connection getCon() {
         try {
-            if (c == null) {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                String dbUrl = "jdbc:mysql://localhost:3306/plandba";
-                String dbUser = "root";
-                String dbPass = "dbedmund45";
-                c = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+            if (con == null) {
+                Class.forName("org.sqlite.JDBC");
+                String dbUrl = "jdbc:sqlite:temp.db";
+                con = DriverManager.getConnection(dbUrl);
+                System.out.println("Databasse Connection Successful");
             }
-        } catch (ClassNotFoundException classNotFoundException) {
-            
-        } catch (SQLException sQLException) {
-            
+        } catch (Exception ex) {
+            Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return c;
+        return con;
     }
     
     public static void createTable(String tblName) {
@@ -55,7 +52,7 @@ public class SQLDatabase {
     public static void dropTable(String tblName) {
         try {
             String q = "DROP TABLE IF EXISTS " + tblName;
-            stmt = c.createStatement();
+            stmt = con.createStatement();
             stmt.execute(q);
         } catch (SQLException ex) {
             Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, ex);

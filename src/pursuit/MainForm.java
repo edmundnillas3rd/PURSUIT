@@ -63,12 +63,10 @@ public class MainForm extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, "card2");
     }// </editor-fold>//GEN-END:initComponents
-
-    
     
     private void btnOpenPlannerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenPlannerActionPerformed
-        this.dispose();
         new PlannerForm();
+        this.dispose();
     }//GEN-LAST:event_btnOpenPlannerActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

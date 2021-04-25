@@ -344,8 +344,8 @@ public class AddWorkoutForm extends javax.swing.JFrame {
         txtDurationMin.setText("");
         txtDurationSec.setText("");
         txtDiet.setText("");
-        this.dispose();
         new PlannerForm();
+        this.dispose();
     }//GEN-LAST:event_btnAddPlanActionPerformed
 
     private void btnAddDietPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDietPlanActionPerformed
@@ -379,8 +379,8 @@ public class AddWorkoutForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveWorkoutActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        this.dispose();
         new PlannerForm();
+        this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
     
     public static void main(String args[]) {
