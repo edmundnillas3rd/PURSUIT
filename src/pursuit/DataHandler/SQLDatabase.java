@@ -54,6 +54,7 @@ public class SQLDatabase {
             String q = "DROP TABLE IF EXISTS " + tblName;
             stmt = con.createStatement();
             stmt.execute(q);
+            stmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, ex);
         } 

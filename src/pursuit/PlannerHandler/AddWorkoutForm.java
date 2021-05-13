@@ -326,8 +326,8 @@ public class AddWorkoutForm extends javax.swing.JFrame {
         SQLDatabase.createTable(plnName);
         
         // Inserts all the data to table
-        int rowCount = tblModWorkout.getRowCount();
-        for (int i = 0; i < rowCount; i++) {
+        int rowWorkoutCount = tblModWorkout.getRowCount();
+        for (int i = 0; i < rowWorkoutCount; i++) {
             workoutTypes = tblModWorkout.getValueAt(i, 0).toString();
             workoutDuration = tblModWorkout.getValueAt(i, 1).toString();
             SQLDatabase.insertData(plnName, workoutTypes, workoutDuration);
